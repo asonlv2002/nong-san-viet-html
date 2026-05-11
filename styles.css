@@ -144,3 +144,22 @@ body{font-weight:400;text-rendering:optimizeLegibility;-webkit-font-smoothing:an
 /* Product section title downscale */
 .products .section-title{margin-bottom:26px}.products .section-title span{font-size:.72rem}.products .section-title h2{font-size:clamp(1.75rem,3vw,2.35rem);max-width:620px}.products .section-title:after{width:56px;height:3px;margin-top:12px}
 @media(max-width:560px){.products .section-title h2{font-size:clamp(1.65rem,8vw,2.15rem)}}
+
+/* Added company capability content */
+.icon-mark{width:42px;height:42px;border-radius:999px;display:grid;place-items:center;background:var(--warm);border:1px solid rgba(128,204,40,.28);color:var(--forest);font-family:var(--body);font-size:.82rem;font-weight:900;letter-spacing:.04em}
+.hero-subline{margin:0 0 8px!important;color:#f6d776!important;font-weight:700;font-size:.98rem!important;line-height:1.35!important}
+.capability-band{background:linear-gradient(180deg,#fff 0%,var(--warm) 100%);padding:58px 0}
+.capability-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.capability-card{border-radius:22px;padding:24px;min-height:210px;display:flex;flex-direction:column;gap:12px}
+.capability-card h3{font-family:var(--heading);font-size:1.25rem;line-height:1.18;color:var(--forest);letter-spacing:-.02em}
+.capability-card p{color:var(--muted);font-size:.92rem;line-height:1.65}
+.capability-card:before{content:'';width:42px;height:4px;border-radius:999px;background:linear-gradient(90deg,var(--primary),var(--gold));display:block;margin-bottom:4px}
+.bulk-cta{margin:28px auto 0;max-width:780px;display:flex;align-items:center;justify-content:space-between;gap:18px;border-radius:24px;padding:20px 24px;background:var(--warm);border:1px solid rgba(128,204,40,.22)}
+.bulk-cta p{color:var(--forest);font-weight:700;line-height:1.55}
+.bulk-cta .btn{flex:0 0 auto}
+.standard-badges{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 6px}
+.standard-badges span{display:inline-flex;align-items:center;min-height:34px;border-radius:999px;padding:7px 12px;background:#fff;border:1px solid rgba(128,204,40,.28);color:var(--forest);font-size:.78rem;font-weight:800}
+
+@media(max-width:1024px){.capability-grid{grid-template-columns:repeat(2,1fr)}.capability-card{min-height:180px}}
+@media(max-width:700px){.bulk-cta{display:grid;text-align:left}.bulk-cta .btn{width:100%}}
+@media(max-width:560px){.hero-subline{font-size:.9rem!important}.capability-band{padding:46px 0}.capability-grid{grid-template-columns:1fr;gap:14px}.capability-card{min-height:auto;padding:20px;border-radius:20px}.standard-badges span{font-size:.74rem}.bulk-cta{padding:18px;border-radius:20px}}
