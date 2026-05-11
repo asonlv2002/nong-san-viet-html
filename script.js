@@ -1,12 +1,81 @@
-const products=[["G\u1ea1o ST25 h\u1eefu c\u01a1","Lo\u1ea1i g\u1ea1o ngon nh\u1ea5t th\u1ebf gi\u1edbi, h\u1ea1t d\u00e0i, tr\u1eafng trong, c\u01a1m d\u1ebbo th\u01a1m m\u00f9i l\u00e1 d\u1ee9a.","images/st25-premium-rice-packaging.png","Ch\u1ee7 l\u1ef1c"],["G\u1ea1o l\u1ee9t huy\u1ebft r\u1ed3ng","Gi\u00e0u dinh d\u01b0\u1ee1ng, t\u1ed1t cho tim m\u1ea1ch v\u00e0 ng\u01b0\u1eddi \u0103n ki\u00eang, h\u1ea1t g\u1ea1o \u0111\u1ecf th\u1eabm \u0111\u1eb7c tr\u01b0ng.","images/red-brown-rice-healthy.png","S\u1ee9c kh\u1ecfe"],["G\u1ea1o n\u1ebfp n\u01b0\u01a1ng","\u0110\u1eb7c s\u1ea3n v\u00f9ng cao, h\u1ea1t to tr\u00f2n, d\u1ebbo nhi\u1ec1u, th\u01a1m n\u1ed3ng, ph\u00f9 h\u1ee3p l\u00e0m x\u00f4i v\u00e0 b\u00e1nh.","images/sticky-rice-specialty.png","\u0110\u1eb7c s\u1ea3n"]].map(p=>({title:p[0],desc:p[1],img:p[2],tag:p[3]}));
-const steps=[["01","Thu ho\u1ea1ch","Ch\u1ecdn l\u00faa \u0111\u00fang \u0111\u1ed9 ch\u00edn \u0111\u1ec3 gi\u1eef h\u01b0\u01a1ng th\u01a1m."],["02","S\u1ea5y - xay x\u00e1t","S\u1ea5y nhi\u1ec7t th\u1ea5p, xay x\u00e1t v\u00e0 ph\u00e2n lo\u1ea1i b\u1eb1ng m\u00e1y hi\u1ec7n \u0111\u1ea1i."],["03","\u0110\u00f3ng g\u00f3i","H\u00fat ch\u00e2n kh\u00f4ng trong m\u00f4i tr\u01b0\u1eddng s\u1ea1ch \u0111\u1ec3 g\u1ea1o t\u01b0\u01a1i l\u00e2u h\u01a1n."]];
-const nutrition=[["N\u0103ng l\u01b0\u1ee3ng","360 kcal"],["Ch\u1ea5t b\u00e9o","1%"],["Carbohydrate","30%"],["Ch\u1ea5t x\u01a1","4%"],["S\u1eaft","2%"],["Kali","2%"]];
-const $=s=>document.querySelector(s);
-$("#productGrid").innerHTML=products.map(p=>`<article class="product-card glass reveal-item"><span class="tag">${p.tag}</span><div class="product-img"><img src="${p.img}" alt="${p.title}"></div><div class="product-body"><h3>${p.title}</h3><p>${p.desc}</p></div></article>`).join("");
-$("#timeline").innerHTML=steps.map(s=>`<div class="step reveal-item"><div class="circle">${s[0]}</div><div><h3>${s[1]}</h3><p>${s[2]}</p></div></div>`).join("");
-$("#nutritionList").innerHTML=nutrition.map(n=>`<div class="nutri-row reveal-item"><span>${n[0]}</span><strong>${n[1]}</strong></div>`).join("");
-const nav=$("#navbar"),links=$("#navLinks"),toggle=$("#menuToggle"),hero=$(".hero");
-function updateNav(){const t=Math.min(scrollY/300,1),o=t*t*(3-2*t);nav.style.backgroundColor=`rgba(26,71,42,${o*.95})`;nav.style.backdropFilter=o>.05?`blur(${o*18}px) saturate(${1+o*.8})`:"none";nav.style.boxShadow=`0 2px 24px rgba(0,0,0,${o*.22})`;nav.style.padding=`${20-o*8}px 0`;if(hero)hero.style.setProperty("--hero-shift",`${Math.min(scrollY*.12,42)}px`)}
-updateNav();addEventListener("scroll",updateNav,{passive:true});
-toggle.addEventListener("click",()=>links.classList.toggle("open"));links.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>links.classList.remove("open")));
-const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add("visible");io.unobserve(e.target)}}),{threshold:.14,rootMargin:"0px 0px -8% 0px"});document.querySelectorAll(".reveal,.reveal-item,.bento,.quality-media figure").forEach(el=>io.observe(el));
+const header = document.getElementById("siteHeader");
+const navToggle = document.getElementById("navToggle");
+const navLinks = document.getElementById("navLinks");
+const links = Array.from(document.querySelectorAll(".nav-link"));
+const reveals = document.querySelectorAll(".reveal");
+const sections = Array.from(document.querySelectorAll("main section[id]"));
+
+function setMenu(open) {
+  navToggle.setAttribute("aria-expanded", String(open));
+  navLinks.classList.toggle("open", open);
+  header.classList.toggle("menu-open", open);
+  document.body.classList.toggle("nav-open", open);
+}
+
+function setActiveLink(id) {
+  links.forEach((link) => {
+    const active = link.getAttribute("href") === `#${id}`;
+    link.classList.toggle("active", active);
+    if (active) {
+      link.setAttribute("aria-current", "page");
+    } else {
+      link.removeAttribute("aria-current");
+    }
+  });
+}
+
+function syncHeader() {
+  header.classList.toggle("scrolled", window.scrollY > 12);
+}
+
+navToggle.addEventListener("click", () => {
+  const isOpen = navToggle.getAttribute("aria-expanded") === "true";
+  setMenu(!isOpen);
+});
+
+navLinks.querySelectorAll("a").forEach((link) => {
+  link.addEventListener("click", () => setMenu(false));
+});
+
+window.addEventListener("resize", () => {
+  if (window.innerWidth > 920) {
+    setMenu(false);
+  }
+});
+
+window.addEventListener("scroll", syncHeader, { passive: true });
+syncHeader();
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    setMenu(false);
+  }
+});
+
+const revealObserver = new IntersectionObserver(
+  (entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  },
+  { threshold: 0.18, rootMargin: "0px 0px -8% 0px" }
+);
+
+reveals.forEach((element) => revealObserver.observe(element));
+
+const sectionObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        setActiveLink(entry.target.id);
+      }
+    });
+  },
+  { threshold: 0.45, rootMargin: "-25% 0px -45% 0px" }
+);
+
+sections.forEach((section) => sectionObserver.observe(section));
+setActiveLink("home");
