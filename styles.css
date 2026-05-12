@@ -1,4 +1,4 @@
-:root {
+﻿:root {
   --forest-950: #0f2f1f;
   --forest-900: #123c25;
   --forest-700: #1f673e;
@@ -325,7 +325,6 @@ button {
 .hero h1,
 .section-heading h2,
 .about-copy h2,
-.nutrition-copy h2,
 .contact-copy h2 {
   margin: 14px 0 0;
   font-family: var(--heading);
@@ -468,7 +467,6 @@ button {
 
 .section-heading h2,
 .about-copy h2,
-.nutrition-copy h2,
 .contact-copy h2 {
   color: var(--forest-950);
   font-size: 2.6rem;
@@ -476,7 +474,6 @@ button {
 
 .section-heading p,
 .about-copy p,
-.nutrition-copy p,
 .contact-copy p {
   margin: 18px 0 0;
   color: var(--muted);
@@ -486,7 +483,8 @@ button {
   margin: 0 0 4px;
 }
 
-.product-section {
+.product-section,
+.partners-section {
   background: var(--paper);
 }
 
@@ -608,12 +606,16 @@ button {
   width: 38px;
 }
 
-.about-section {
+.about-section,
+.process-section {
   background: linear-gradient(180deg, var(--rice), #eef4e6);
 }
 
+.machinery-section {
+  background: var(--surface);
+}
+
 .about-grid,
-.nutrition-grid,
 .contact-grid {
   display: grid;
   align-items: center;
@@ -735,75 +737,6 @@ button {
 .process-list strong {
   display: block;
   color: var(--forest-950);
-}
-
-.nutrition-section {
-  background: var(--surface);
-}
-
-.nutrition-grid {
-  grid-template-columns: minmax(0, 0.95fr) minmax(360px, 1fr);
-}
-
-.nutrition-copy {
-  border-radius: var(--radius);
-  padding: 34px;
-  color: #fff;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent),
-    var(--forest-950);
-  box-shadow: var(--shadow);
-}
-
-.nutrition-copy .eyebrow {
-  color: #f3cf79;
-}
-
-.nutrition-copy h2 {
-  color: #fff;
-}
-
-.nutrition-copy p {
-  color: #d8e4d8;
-}
-
-.nutrition-table {
-  display: grid;
-  gap: 0;
-  margin-top: 28px;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: var(--radius);
-}
-
-.nutrition-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 18px;
-  min-height: 56px;
-  padding: 12px 16px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.06);
-}
-
-.nutrition-row:last-child {
-  border-bottom: 0;
-}
-
-.nutrition-row span {
-  color: rgba(255, 255, 255, 0.82);
-}
-
-.nutrition-row strong {
-  color: #f3cf79;
-  font-size: 1.05rem;
-}
-
-.cooking-panel {
-  display: grid;
-  gap: 18px;
-  align-content: start;
 }
 
 .cook-card {
@@ -1003,19 +936,16 @@ button {
 }
 
 .product-card:nth-child(2),
-.value-item:nth-child(2),
-.nutrition-row:nth-child(2) {
+.value-item:nth-child(2) {
   transition-delay: 70ms;
 }
 
 .product-card:nth-child(3),
-.value-item:nth-child(3),
-.nutrition-row:nth-child(3) {
+.value-item:nth-child(3) {
   transition-delay: 120ms;
 }
 
-.value-item:nth-child(4),
-.nutrition-row:nth-child(4) {
+.value-item:nth-child(4) {
   transition-delay: 170ms;
 }
 
@@ -1026,7 +956,6 @@ button {
 
   .section-heading h2,
   .about-copy h2,
-  .nutrition-copy h2,
   .contact-copy h2 {
     font-size: 2.2rem;
   }
@@ -1074,7 +1003,7 @@ button {
   }
 
   .nav-links.open {
-    max-height: 320px;
+    max-height: 420px;
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
@@ -1096,7 +1025,6 @@ button {
 
   .hero-grid,
   .about-grid,
-  .nutrition-grid,
   .contact-grid,
   .split-heading {
     grid-template-columns: 1fr;
@@ -1171,7 +1099,6 @@ button {
 
   .section-heading h2,
   .about-copy h2,
-  .nutrition-copy h2,
   .contact-copy h2 {
     font-size: 1.9rem;
   }
@@ -1185,10 +1112,7 @@ button {
   .image-frame img,
   .about-media .image-frame img {
     aspect-ratio: 4 / 3;
-  }
-
-  .nutrition-copy,
-  .cook-card,
+  }  .cook-card,
   .contact-form {
     padding: 22px;
   }
@@ -1202,15 +1126,7 @@ button {
   .process-list span {
     width: 38px;
     height: 38px;
-  }
-
-  .nutrition-row {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 2px;
-  }
-
-  .footer-row {
+  }.footer-row {
     align-items: flex-start;
     flex-direction: column;
   }
@@ -1233,7 +1149,6 @@ button {
 
   .section-heading h2,
   .about-copy h2,
-  .nutrition-copy h2,
   .contact-copy h2 {
     font-size: 1.72rem;
   }
