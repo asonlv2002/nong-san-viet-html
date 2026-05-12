@@ -13,34 +13,59 @@ function setMenu(open) {
   document.body.classList.toggle("nav-open", open);
 }
 
-function moveNavIndicator(activeLink) {
+function placeNavIndicator(activeLink, animate = true) {
   if (!navIndicator || !activeLink) return;
 
-  navLinks.classList.add("has-indicator");
   navIndicator.style.width = `${activeLink.offsetWidth}px`;
   navIndicator.style.height = `${activeLink.offsetHeight}px`;
   navIndicator.style.transform = `translate(${activeLink.offsetLeft}px, ${activeLink.offsetTop}px)`;
+
+  if (animate) {
+    navIndicator.classList.remove("no-transition");
+  } else {
+    navIndicator.classList.add("no-transition");
+  }
+
+  requestAnimationFrame(() => navLinks.classList.add("has-indicator"));
+}
+
+function moveNavIndicator(activeLink) {
+  if (!navIndicator || !activeLink) return;
+
+  const previousHref = sessionStorage.getItem("lastNavHref");
+  const previousLink = previousHref
+    ? links.find((link) => link.getAttribute("href") === previousHref)
+    : null;
+
+  if (previousLink && previousLink !== activeLink) {
+    placeNavIndicator(previousLink, false);
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => placeNavIndicator(activeLink, true));
+    });
+    sessionStorage.removeItem("lastNavHref");
+    return;
+  }
+
+  placeNavIndicator(activeLink, true);
 }
 
 function setActiveLink(id) {
-  const hashLink = links.some((link) => (link.getAttribute("href") || "").startsWith("#"));
   let activeLink = document.querySelector(".nav-link.active");
 
-  if (hashLink) {
-    links.forEach((link) => {
-      const href = link.getAttribute("href") || "";
-      const active = href === `#${id}` || href === `/${id}` || href === `/${id}/`;
-      if (href.startsWith("#")) {
-        link.classList.toggle("active", active);
-      }
-      if (active) {
-        link.setAttribute("aria-current", "page");
-        activeLink = link;
-      } else if (href.startsWith("#")) {
-        link.removeAttribute("aria-current");
-      }
-    });
-  }
+  links.forEach((link) => {
+    const href = link.getAttribute("href") || "";
+    const active = href === `#${id}`;
+
+    if (!href.startsWith("#")) return;
+
+    link.classList.toggle("active", active);
+    if (active) {
+      link.setAttribute("aria-current", "page");
+      activeLink = link;
+    } else {
+      link.removeAttribute("aria-current");
+    }
+  });
 
   moveNavIndicator(activeLink);
 }
@@ -58,6 +83,9 @@ navToggle.addEventListener("click", () => {
 navLinks.querySelectorAll("a").forEach((link) => {
   link.addEventListener("click", () => {
     const href = link.getAttribute("href") || "";
+    if (!href.startsWith("#")) {
+      sessionStorage.setItem("lastNavHref", document.querySelector(".nav-link.active")?.getAttribute("href") || "");
+    }
     const targetId = href.startsWith("#") ? href.slice(1) : "";
     if (targetId) {
       setActiveLink(targetId);

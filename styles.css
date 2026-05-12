@@ -162,7 +162,6 @@ button {
   align-items: center;
   justify-content: center;
   gap: 6px;
-  overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 999px;
   padding: 6px;
@@ -175,10 +174,8 @@ button {
   position: absolute;
   inset: 1px;
   border-radius: inherit;
-  background: linear-gradient(120deg, transparent 0 35%, rgba(255, 255, 255, 0.2) 48%, transparent 62% 100%);
-  background-size: 260% 100%;
-  animation: navSheen 5.5s linear infinite;
-  opacity: 0.65;
+  background: rgba(255, 255, 255, 0.08);
+  opacity: 0.7;
   pointer-events: none;
 }
 
@@ -186,28 +183,21 @@ button {
   position: absolute;
   top: 0;
   left: 0;
-  height: calc(100% - 12px);
-  overflow: hidden;
+  z-index: 0;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.16);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08), 0 0 22px rgba(215, 160, 58, 0.22);
-  transform: translateX(0);
-  transition: transform 260ms cubic-bezier(0.2, 0.8, 0.2, 1), width 260ms cubic-bezier(0.2, 0.8, 0.2, 1), opacity 180ms ease;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08), 0 0 18px rgba(215, 160, 58, 0.18);
   opacity: 0;
   pointer-events: none;
-}
-
-.nav-indicator::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.42), transparent);
-  transform: translateX(-120%);
-  animation: navIndicatorRun 2.8s ease-in-out infinite;
+  transition: transform 260ms cubic-bezier(0.2, 0.8, 0.2, 1), width 260ms cubic-bezier(0.2, 0.8, 0.2, 1), opacity 160ms ease;
 }
 
 .nav-links.has-indicator .nav-indicator {
   opacity: 1;
+}
+
+.nav-indicator.no-transition {
+  transition: none;
 }
 
 .nav-link {
@@ -221,13 +211,11 @@ button {
   color: rgba(255, 255, 255, 0.84);
   font-size: 0.9rem;
   font-weight: 700;
-  transition: color 180ms ease;
 }
 
 .nav-link:hover,
 .nav-link.active {
   color: #fff;
-  background: transparent;
 }
 
 .nav-phone {
@@ -902,26 +890,6 @@ button {
   box-shadow: 0 16px 40px rgba(0, 104, 255, 0.34);
 }
 
-@keyframes navSheen {
-  0% {
-    background-position: 140% 0;
-  }
-  100% {
-    background-position: -140% 0;
-  }
-}
-
-@keyframes navIndicatorRun {
-  0%,
-  18% {
-    transform: translateX(-120%);
-  }
-  58%,
-  100% {
-    transform: translateX(120%);
-  }
-}
-
 .reveal {
   opacity: 0;
   transform: translateY(22px);
@@ -1169,8 +1137,7 @@ button {
     transition-duration: 0.01ms !important;
   }
 
-  .nav-links::before,
-  .nav-indicator::after {
+  .nav-links::before {
     animation: none !important;
   }
 
