@@ -71,7 +71,8 @@ function setActiveLink(id) {
 }
 
 function syncHeader() {
-  header.classList.toggle("scrolled", window.scrollY > 12);
+  const hasRouteLayout = Boolean(document.querySelector(".route-main"));
+  header.classList.toggle("scrolled", hasRouteLayout || window.scrollY > 12);
 }
 
 if (navToggle && navLinks && header) {

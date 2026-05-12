@@ -1173,7 +1173,14 @@ button {
 .route-hero p,
 .product-detail-copy .hero-lead {
   max-width: 760px;
+}
+
+.route-hero p {
   color: #f3ead5;
+}
+
+.product-detail-copy .hero-lead {
+  color: var(--muted);
 }
 
 .product-detail {
