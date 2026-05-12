@@ -184,8 +184,8 @@ button {
 
 .nav-indicator {
   position: absolute;
-  top: 6px;
-  left: 6px;
+  top: 0;
+  left: 0;
   height: calc(100% - 12px);
   overflow: hidden;
   border-radius: 999px;
@@ -811,7 +811,6 @@ button {
 .footer-row a:hover {
   color: var(--forest-700);
 }
-
 .contact-form {
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -861,7 +860,6 @@ button {
   width: 100%;
   margin-top: 20px;
 }
-
 .site-footer {
   padding: 24px 0;
   color: #dce8d8;
@@ -1112,8 +1110,7 @@ button {
   .image-frame img,
   .about-media .image-frame img {
     aspect-ratio: 4 / 3;
-  }  .cook-card,
-  .contact-form {
+  }  .cook-card {
     padding: 22px;
   }
 
@@ -1180,5 +1177,125 @@ button {
   .reveal {
     opacity: 1 !important;
     transform: none !important;
+  }
+}
+
+.route-main {
+  padding-top: 76px;
+}
+
+.route-hero {
+  color: #fff;
+  background:
+    linear-gradient(120deg, rgba(15, 47, 31, 0.94), rgba(31, 103, 62, 0.78)),
+    url("images/rice-pattern-warm-background.png") center / cover no-repeat;
+}
+
+.route-hero .section-heading {
+  margin-bottom: 0;
+}
+
+.route-hero h1,
+.product-detail-copy h1 {
+  margin: 14px 0 0;
+  font-family: var(--heading);
+  font-size: clamp(2.4rem, 6vw, 4.2rem);
+  line-height: 1.08;
+}
+
+.route-hero p,
+.product-detail-copy .hero-lead {
+  max-width: 760px;
+  color: #f3ead5;
+}
+
+.product-detail {
+  background: linear-gradient(180deg, var(--rice), var(--paper));
+}
+
+.product-detail-grid {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.9fr) minmax(0, 1fr);
+  gap: 56px;
+  align-items: center;
+}
+
+.product-detail-media {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 14px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.product-detail-media img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: calc(var(--radius) - 6px);
+  object-fit: cover;
+}
+
+.product-detail-media .chip-row {
+  margin-top: 14px;
+}
+
+.product-detail-copy p:not(.eyebrow):not(.hero-lead) {
+  color: var(--muted);
+}
+
+.feature-list {
+  display: grid;
+  gap: 12px;
+  margin: 26px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.feature-list li {
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--gold);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  color: var(--forest-950);
+  background: rgba(255, 255, 255, 0.72);
+  font-weight: 700;
+}
+
+.related-section {
+  background: var(--surface);
+}
+
+.related-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.related-card {
+  display: grid;
+  grid-template-columns: 116px 1fr;
+  align-items: center;
+  gap: 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 12px;
+  background: var(--paper);
+  box-shadow: var(--soft-shadow);
+  font-family: var(--heading);
+  font-weight: 900;
+}
+
+.related-card img {
+  width: 116px;
+  height: 92px;
+  border-radius: calc(var(--radius) - 6px);
+  object-fit: cover;
+}
+
+@media (max-width: 920px) {
+  .product-detail-grid,
+  .related-grid {
+    grid-template-columns: 1fr;
   }
 }

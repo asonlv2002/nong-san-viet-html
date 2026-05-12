@@ -1,0 +1,50 @@
+<div class="product-grid">
+          <article class="product-card product-card-primary reveal">
+            <div class="product-media">
+              <img src="images/st25-premium-rice-packaging.png" alt="Bao bì gạo ST25 hữu cơ" loading="lazy" width="1024" height="1024">
+            </div>
+            <div class="product-body">
+              <span class="tag">Chủ lực</span>
+              <h3>Gạo ST25 hữu cơ</h3>
+              <p>Loại gạo ngon nhất thế giới, hạt dài, trắng trong, cơm dẻo thơm mùi lá dứa.</p>
+              <div class="chip-row">
+                <span>Hạt dài</span>
+                <span>Dẻo thơm</span>
+                <span>Túi 5KG</span>
+              </div>
+              <a class="text-link" href="#contact">Tư vấn đặt hàng</a>
+            </div>
+          </article>
+
+          <article class="product-card reveal">
+            <div class="product-media">
+              <img src="images/red-brown-rice-healthy.png" alt="Gạo lứt huyết rồng" loading="lazy" width="1024" height="1024">
+            </div>
+            <div class="product-body">
+              <span class="tag">Sức khỏe</span>
+              <h3>Gạo lứt huyết rồng</h3>
+              <p>Giàu dinh dưỡng, tốt cho tim mạch và người ăn kiêng, hạt gạo đỏ thẫm đặc trưng.</p>
+              <div class="chip-row">
+                <span>Giàu chất xơ</span>
+                <span>Ăn kiêng</span>
+              </div>
+              <a class="text-link" href="#contact">Tư vấn đặt hàng</a>
+            </div>
+          </article>
+
+          <article class="product-card reveal">
+            <div class="product-media">
+              <img src="images/sticky-rice-specialty.png" alt="Gạo nếp nương đặc sản" loading="lazy" width="1024" height="1024">
+            </div>
+            <div class="product-body">
+              <span class="tag">Đặc sản</span>
+              <h3>Gạo nếp nương</h3>
+              <p>Đặc sản vùng cao, hạt to tròn, dẻo nhiều, thơm nồng, phù hợp làm xôi và bánh.</p>
+              <div class="chip-row">
+                <span>Dẻo nhiều</span>
+                <span>Làm xôi</span>
+              </div>
+              <a class="text-link" href="#contact">Tư vấn đặt hàng</a>
+            </div>
+          </article>
+        </div>

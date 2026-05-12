@@ -2,7 +2,7 @@ const header = document.getElementById("siteHeader");
 const navToggle = document.getElementById("navToggle");
 const navLinks = document.getElementById("navLinks");
 const links = Array.from(document.querySelectorAll(".nav-link"));
-const navIndicator = navLinks.querySelector(".nav-indicator");
+const navIndicator = navLinks?.querySelector(".nav-indicator");
 const reveals = document.querySelectorAll(".reveal");
 const sections = Array.from(document.querySelectorAll("main section[id]"));
 
@@ -16,32 +16,31 @@ function setMenu(open) {
 function moveNavIndicator(activeLink) {
   if (!navIndicator || !activeLink) return;
 
-  const linkRect = activeLink.getBoundingClientRect();
-  const navRect = navLinks.getBoundingClientRect();
-  const styles = getComputedStyle(navLinks);
-  const paddingLeft = Number.parseFloat(styles.paddingLeft) || 0;
-  const paddingTop = Number.parseFloat(styles.paddingTop) || 0;
-
   navLinks.classList.add("has-indicator");
-  navIndicator.style.width = `${linkRect.width}px`;
-  navIndicator.style.height = `${linkRect.height}px`;
-  navIndicator.style.transform = `translate(${linkRect.left - navRect.left - paddingLeft}px, ${linkRect.top - navRect.top - paddingTop}px)`;
-  navIndicator.offsetHeight;
+  navIndicator.style.width = `${activeLink.offsetWidth}px`;
+  navIndicator.style.height = `${activeLink.offsetHeight}px`;
+  navIndicator.style.transform = `translate(${activeLink.offsetLeft}px, ${activeLink.offsetTop}px)`;
 }
 
 function setActiveLink(id) {
-  let activeLink = null;
+  const hashLink = links.some((link) => (link.getAttribute("href") || "").startsWith("#"));
+  let activeLink = document.querySelector(".nav-link.active");
 
-  links.forEach((link) => {
-    const active = link.getAttribute("href") === `#${id}`;
-    link.classList.toggle("active", active);
-    if (active) {
-      link.setAttribute("aria-current", "page");
-      activeLink = link;
-    } else {
-      link.removeAttribute("aria-current");
-    }
-  });
+  if (hashLink) {
+    links.forEach((link) => {
+      const href = link.getAttribute("href") || "";
+      const active = href === `#${id}` || href === `/${id}` || href === `/${id}/`;
+      if (href.startsWith("#")) {
+        link.classList.toggle("active", active);
+      }
+      if (active) {
+        link.setAttribute("aria-current", "page");
+        activeLink = link;
+      } else if (href.startsWith("#")) {
+        link.removeAttribute("aria-current");
+      }
+    });
+  }
 
   moveNavIndicator(activeLink);
 }
@@ -50,13 +49,21 @@ function syncHeader() {
   header.classList.toggle("scrolled", window.scrollY > 12);
 }
 
+if (navToggle && navLinks && header) {
 navToggle.addEventListener("click", () => {
   const isOpen = navToggle.getAttribute("aria-expanded") === "true";
   setMenu(!isOpen);
 });
 
 navLinks.querySelectorAll("a").forEach((link) => {
-  link.addEventListener("click", () => setMenu(false));
+  link.addEventListener("click", () => {
+    const href = link.getAttribute("href") || "";
+    const targetId = href.startsWith("#") ? href.slice(1) : "";
+    if (targetId) {
+      setActiveLink(targetId);
+    }
+    setMenu(false);
+  });
 });
 
 window.addEventListener("resize", () => {
@@ -71,6 +78,7 @@ window.addEventListener("load", () => {
   setActiveLink(document.querySelector(".nav-link.active")?.getAttribute("href")?.slice(1) || "home");
 });
 syncHeader();
+}
 
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") {
@@ -104,4 +112,8 @@ const sectionObserver = new IntersectionObserver(
 );
 
 sections.forEach((section) => sectionObserver.observe(section));
-setActiveLink("home");
+if (links.some((link) => (link.getAttribute("href") || "").startsWith("#")) && sections.length) {
+  setActiveLink("home");
+} else {
+  moveNavIndicator(document.querySelector(".nav-link.active"));
+}
