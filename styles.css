@@ -1273,3 +1273,370 @@ button {
     grid-template-columns: 1fr;
   }
 }
+
+/* Style switcher: one content tree, seven polished layout systems. */
+.style-switcher { position: relative; z-index: 5; }
+.style-switcher-toggle,
+.style-option { border: 1px solid rgba(255,255,255,.28); color: #fff; background: rgba(255,255,255,.12); font-weight: 900; }
+.style-switcher-toggle { min-height: 42px; border-radius: 999px; padding: 9px 14px; backdrop-filter: blur(12px); }
+.style-menu { position: absolute; top: calc(100% + 10px); right: 0; display: grid; grid-template-columns: repeat(2, minmax(112px, 1fr)); gap: 8px; min-width: 260px; padding: 10px; border: 1px solid rgba(255,255,255,.2); border-radius: var(--radius); background: rgba(18,60,37,.96); box-shadow: var(--shadow); opacity: 0; pointer-events: none; transform: translateY(-8px); transition: opacity 180ms ease, transform 180ms ease; }
+.style-switcher.open .style-menu { opacity: 1; pointer-events: auto; transform: translateY(0); }
+.style-option { min-height: 40px; border-radius: 12px; padding: 8px 10px; text-align: left; }
+.style-option.active { color: #132014; background: #f0c35a; }
+
+body[data-style] .hero-grid,
+body[data-style] .product-grid,
+body[data-style] .about-grid,
+body[data-style] .contact-grid { transition: grid-template-columns 220ms ease, gap 220ms ease; }
+body[data-style] .product-card,
+body[data-style] .value-item,
+body[data-style] .image-frame,
+body[data-style] .process-list { transition: transform 180ms ease, border-radius 180ms ease, box-shadow 180ms ease, background-color 180ms ease; }
+body[data-style] .section { position: relative; overflow: hidden; }
+
+/* 1. Lua chin - warm premium farm catalogue. */
+body[data-style="harvest"] { --forest-950:#2b2415; --forest-900:#5e421c; --forest-700:#8b6123; --leaf:#6f8f35; --gold:#d8a444; --rice:#f6ead3; --paper:#fff8ec; --surface:#fffdf8; --ink:#2b241b; --muted:#71624c; --line:rgba(139,97,35,.2); --radius:22px; --shadow:0 26px 70px rgba(72,48,20,.16); --soft-shadow:0 14px 34px rgba(72,48,20,.1); }
+body[data-style="harvest"] .hero { background-position:center; }
+body[data-style="harvest"] .hero-shade { background:linear-gradient(90deg, rgba(43,36,21,.9), rgba(94,66,28,.64) 52%, rgba(94,66,28,.18)); }
+body[data-style="harvest"] .hero-grid { grid-template-columns:minmax(0,1.15fr) minmax(320px,.85fr); gap:42px; }
+body[data-style="harvest"] .hero-product { border-radius:34px; }
+body[data-style="harvest"] .product-grid { grid-template-columns:1.25fr .9fr .9fr; }
+body[data-style="harvest"] .about-grid { grid-template-columns:.95fr 1.05fr; }
+
+/* 2. Song nuoc - calm aqua, image first, cards as wide islands. */
+body[data-style="river"] { --forest-950:#07313b; --forest-900:#0b5362; --forest-700:#127c83; --leaf:#2fae93; --gold:#e9bd69; --rice:#e8f4ef; --paper:#f6fbf8; --surface:#ffffff; --ink:#153037; --muted:#557078; --line:rgba(18,124,131,.18); --radius:30px; --shadow:0 26px 70px rgba(7,49,59,.14); --soft-shadow:0 14px 34px rgba(7,49,59,.09); }
+body[data-style="river"] .site-header.scrolled,
+body[data-style="river"] .site-header.menu-open { background:rgba(7,49,59,.94); }
+body[data-style="river"] .hero-shade { background:linear-gradient(100deg, rgba(7,49,59,.42), rgba(7,49,59,.82) 48%, rgba(7,49,59,.92)); }
+body[data-style="river"] .hero-grid { grid-template-columns:minmax(320px,.78fr) minmax(0,1.22fr); }
+body[data-style="river"] .hero-product { order:1; border-radius:40px; }
+body[data-style="river"] .hero-copy { order:2; }
+body[data-style="river"] .product-grid { grid-template-columns:1fr 1fr; }
+body[data-style="river"] .product-card-primary { grid-column:1 / -1; display:grid; grid-template-columns:.9fr 1.1fr; }
+body[data-style="river"] .product-card-primary .product-media img { height:100%; aspect-ratio:auto; }
+body[data-style="river"] .value-grid { grid-template-columns:1fr; }
+
+/* 3. Gach moc - earthy workshop grid, compact and utilitarian. */
+body[data-style="terracotta"] { --forest-950:#332015; --forest-900:#74351f; --forest-700:#a14e2f; --leaf:#6f7e3a; --gold:#cc9554; --rice:#efe0d0; --paper:#fbf0e6; --surface:#fff8f1; --ink:#302119; --muted:#735849; --line:rgba(161,78,47,.22); --radius:10px; --shadow:0 18px 0 rgba(51,32,21,.08); --soft-shadow:0 10px 0 rgba(51,32,21,.06); }
+body[data-style="terracotta"] .hero { min-height:76dvh; }
+body[data-style="terracotta"] .hero-shade { background:linear-gradient(90deg, rgba(51,32,21,.88), rgba(116,53,31,.58)); }
+body[data-style="terracotta"] .hero-grid { grid-template-columns:minmax(0,1fr) 360px; gap:24px; align-items:end; }
+body[data-style="terracotta"] .product-grid { grid-template-columns:repeat(4,1fr); gap:16px; }
+body[data-style="terracotta"] .product-card-primary { grid-column:span 2; }
+body[data-style="terracotta"] .about-grid,
+body[data-style="terracotta"] .contact-grid { grid-template-columns:1fr 1fr; gap:28px; }
+body[data-style="terracotta"] .value-grid { grid-template-columns:repeat(2,1fr); }
+
+/* 4. Dem xanh - premium dark corporate, readable and steady. */
+body[data-style="midnight"] {
+  --forest-950:#0b1714;
+  --forest-900:#132c26;
+  --forest-700:#2b6655;
+  --leaf:#78a866;
+  --gold:#d0b46b;
+  --rice:#0f1d19;
+  --paper:#13231f;
+  --surface:#1a2d27;
+  --ink:#f3f0e6;
+  --muted:#b8c3ba;
+  --line:rgba(208,180,107,.18);
+  --radius:18px;
+  --shadow:0 26px 70px rgba(0,0,0,.34);
+  --soft-shadow:0 14px 38px rgba(0,0,0,.24);
+}
+body[data-style="midnight"] .site-header.scrolled,
+body[data-style="midnight"] .site-header.menu-open { background:rgba(11,23,20,.95); }
+body[data-style="midnight"] .hero {
+  min-height:86dvh;
+  background-image:linear-gradient(120deg, rgba(11,23,20,.92), rgba(19,44,38,.7)), url("images/hero-st25-organic-field.png");
+  background-position:center;
+}
+body[data-style="midnight"] .hero-shade { background:linear-gradient(90deg, rgba(11,23,20,.72), rgba(11,23,20,.34)); }
+body[data-style="midnight"] .hero-grid {
+  grid-template-columns:minmax(0,1fr) minmax(330px,430px);
+  align-items:center;
+  text-align:left;
+}
+body[data-style="midnight"] .hero-lead { color:#ded8c8; margin-inline:0; }
+body[data-style="midnight"] .hero-actions { justify-content:flex-start; }
+body[data-style="midnight"] .hero-product {
+  max-width:none;
+  border-color:rgba(208,180,107,.28);
+  background:rgba(26,45,39,.82);
+}
+body[data-style="midnight"] .hero-facts div { background:#10231e; }
+body[data-style="midnight"] .product-section,
+body[data-style="midnight"] .about-section,
+body[data-style="midnight"] .process-section,
+body[data-style="midnight"] .partners-section { background:var(--paper); }
+body[data-style="midnight"] .product-grid { grid-template-columns:repeat(3,minmax(0,1fr)); align-items:stretch; }
+body[data-style="midnight"] .product-card:nth-child(2) { margin-top:0; }
+body[data-style="midnight"] .product-card,
+body[data-style="midnight"] .process-list,
+body[data-style="midnight"] .cook-card,
+body[data-style="midnight"] .contact-form { background:var(--surface); }
+body[data-style="midnight"] .value-item,
+body[data-style="midnight"] .chip-row span,
+body[data-style="midnight"] .standard-row span { background:rgba(255,255,255,.04); }
+body[data-style="midnight"] .image-frame figcaption { background:rgba(11,23,20,.82); }
+
+/* 5. Tap chi - warm editorial magazine with controlled hierarchy. */
+body[data-style="editorial"] {
+  --forest-950:#1c1914;
+  --forest-900:#3e3427;
+  --forest-700:#756044;
+  --leaf:#6f7b47;
+  --gold:#b86a2c;
+  --rice:#f0eadf;
+  --paper:#fffaf0;
+  --surface:#fffdf8;
+  --ink:#1c1914;
+  --muted:#665f54;
+  --line:rgba(28,25,20,.18);
+  --radius:12px;
+  --shadow:0 18px 46px rgba(42,34,24,.1);
+  --soft-shadow:0 10px 28px rgba(42,34,24,.07);
+}
+body[data-style="editorial"] .site-header.scrolled,
+body[data-style="editorial"] .site-header.menu-open { background:rgba(28,25,20,.94); }
+body[data-style="editorial"] .hero {
+  min-height:82dvh;
+  color:#fff;
+  background:linear-gradient(90deg, rgba(28,25,20,.88), rgba(62,52,39,.58)), url("images/hero-st25-organic-field.png") center/cover;
+}
+body[data-style="editorial"] .hero-shade { background:none; }
+body[data-style="editorial"] .hero-grid {
+  grid-template-columns:minmax(0,1fr) minmax(320px,420px);
+  gap:48px;
+  padding-top:0;
+  padding-bottom:0;
+  border:0;
+}
+body[data-style="editorial"] .hero h1 {
+  max-width:760px;
+  font-size:clamp(2.7rem,5.5vw,5.2rem);
+  line-height:1.02;
+  text-transform:none;
+}
+body[data-style="editorial"] .hero-lead { color:#f1e6d5; }
+body[data-style="editorial"] .btn-secondary { color:#fff; }
+body[data-style="editorial"] .hero-product {
+  border:1px solid rgba(255,255,255,.24);
+  border-radius:var(--radius);
+  background:rgba(255,255,255,.12);
+  box-shadow:var(--shadow);
+}
+body[data-style="editorial"] .section-heading {
+  padding-bottom:18px;
+  border-bottom:1px solid var(--line);
+}
+body[data-style="editorial"] .product-grid {
+  grid-template-columns:1.12fr .94fr .94fr;
+  gap:22px;
+  background:transparent;
+  border:0;
+}
+body[data-style="editorial"] .product-card {
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--soft-shadow);
+}
+body[data-style="editorial"] .product-card-primary { grid-row:auto; }
+body[data-style="editorial"] .about-grid { grid-template-columns:1fr 1fr; }
+body[data-style="editorial"] .value-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+body[data-style="editorial"] .image-frame figcaption { background:rgba(28,25,20,.78); }
+
+/* 6. Vuon som - soft orchard, generous whitespace and rounded media. */
+body[data-style="orchard"] { --forest-950:#20321f; --forest-900:#3f6538; --forest-700:#6d9144; --leaf:#a9be62; --gold:#df8f5d; --rice:#f2eadf; --paper:#fff8f1; --surface:#fffdfa; --ink:#263024; --muted:#68715f; --line:rgba(109,145,68,.18); --radius:32px; --shadow:0 26px 68px rgba(70,92,49,.15); --soft-shadow:0 14px 34px rgba(70,92,49,.09); }
+body[data-style="orchard"] .hero-shade { background:linear-gradient(90deg, rgba(32,50,31,.86), rgba(63,101,56,.58), rgba(63,101,56,.16)); }
+body[data-style="orchard"] .hero-grid { grid-template-columns:minmax(0,.92fr) minmax(360px,1.08fr); gap:64px; }
+body[data-style="orchard"] .hero-product { border-radius:52px 18px; }
+body[data-style="orchard"] .product-grid { grid-template-columns:.9fr 1.1fr .9fr; }
+body[data-style="orchard"] .product-card:nth-child(2) { transform:translateY(28px); }
+body[data-style="orchard"] .about-grid { grid-template-columns:.82fr 1.18fr; }
+body[data-style="orchard"] .about-media { order:1; }
+body[data-style="orchard"] .about-copy { order:2; }
+
+/* 7. Cho que - lively but controlled marketplace. */
+body[data-style="market"] { --forest-950:#1f2a17; --forest-900:#425b25; --forest-700:#768334; --leaf:#c2c95a; --gold:#dc6d35; --rice:#f5ecc8; --paper:#fff6d8; --surface:#fffdf0; --ink:#2a2918; --muted:#706946; --line:rgba(220,109,53,.22); --radius:16px; --shadow:0 24px 58px rgba(82,78,35,.14); --soft-shadow:0 12px 30px rgba(82,78,35,.1); }
+body[data-style="market"] .hero-shade { background:linear-gradient(90deg, rgba(31,42,23,.86), rgba(66,91,37,.62), rgba(66,91,37,.2)); }
+body[data-style="market"] .hero-grid { grid-template-columns:minmax(0,1fr) 380px; align-items:end; }
+body[data-style="market"] .hero-copy { padding:24px; border-radius:var(--radius); background:rgba(255,246,216,.92); color:var(--ink); box-shadow:var(--soft-shadow); }
+body[data-style="market"] .hero-lead { color:var(--muted); }
+body[data-style="market"] .product-grid { grid-template-columns:repeat(3,1fr); gap:26px; }
+body[data-style="market"] .product-card:nth-child(2) { transform:translateY(22px); }
+body[data-style="market"] .product-card:hover { transform:translateY(-4px); }
+body[data-style="market"] .value-grid { grid-template-columns:repeat(4,1fr); }
+
+@media (min-width:921px) {
+  body[data-style="river"] .section,
+  body[data-style="orchard"] .section { border-radius:42px; margin:24px auto; width:min(1220px, calc(100% - 36px)); }
+  body[data-style="editorial"] .section { border-top:1px solid var(--line); }
+  body[data-style="midnight"] .section { width:min(1200px, calc(100% - 40px)); margin:22px auto; border:1px solid var(--line); border-radius:28px; }
+  body[data-style="market"] .partners-section .standard-row { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); }
+}
+
+@media (max-width:1080px) {
+  .style-switcher { margin-left:auto; }
+  body[data-style="terracotta"] .product-grid,
+  body[data-style="market"] .value-grid { grid-template-columns:repeat(2,1fr); }
+}
+@media (max-width:920px) {
+  .style-menu { right:-56px; }
+  body[data-style] .hero-grid,
+  body[data-style] .about-grid,
+  body[data-style] .contact-grid { grid-template-columns:1fr; }
+  body[data-style="river"] .hero-copy,
+  body[data-style="river"] .hero-product,
+  body[data-style="orchard"] .about-copy,
+  body[data-style="orchard"] .about-media { order:initial; }
+  body[data-style="river"] .product-card-primary { display:flex; grid-column:auto; }
+  body[data-style="river"] .product-grid,
+  body[data-style="editorial"] .product-grid,
+  body[data-style="orchard"] .product-grid { grid-template-columns:1fr 1fr; }
+  body[data-style="midnight"] .hero-actions { justify-content:center; }
+}
+@media (max-width:680px) {
+  .style-switcher-toggle { min-height:38px; padding:7px 11px; }
+  .style-menu { position:fixed; top:72px; right:14px; left:14px; grid-template-columns:1fr 1fr; }
+  body[data-style] .product-grid,
+  body[data-style] .value-grid { grid-template-columns:1fr; }
+  body[data-style="editorial"] .hero h1 { font-size:2.35rem; }
+  body[data-style="midnight"] .hero-actions { justify-content:stretch; }
+  body[data-style="orchard"] .product-card:nth-child(2),
+  body[data-style="market"] .product-card:nth-child(2) { transform:none; }
+}
+
+/* 8. SEO ro rang - content-first layout for scanability, internal links and conversions. */
+body[data-style="seo"] {
+  --forest-950:#10251a;
+  --forest-900:#1d4b2d;
+  --forest-700:#2f7544;
+  --leaf:#7db43c;
+  --gold:#c9902f;
+  --rice:#f4f0e6;
+  --paper:#fffaf0;
+  --surface:#ffffff;
+  --ink:#18241c;
+  --muted:#5b685f;
+  --line:rgba(29,75,45,.16);
+  --radius:14px;
+  --shadow:0 18px 48px rgba(16,37,26,.12);
+  --soft-shadow:0 10px 28px rgba(16,37,26,.08);
+}
+body[data-style="seo"] .hero {
+  min-height:auto;
+  padding:118px 0 56px;
+  color:var(--ink);
+  background:linear-gradient(180deg, #fffaf0 0%, #eef5e6 100%);
+}
+body[data-style="seo"] .hero-shade { background:none; }
+body[data-style="seo"] .hero-grid {
+  grid-template-columns:minmax(0,1fr) 390px;
+  align-items:start;
+  gap:34px;
+}
+body[data-style="seo"] .hero h1 { color:var(--forest-950); font-size:clamp(2.4rem,5vw,4.4rem); }
+body[data-style="seo"] .hero-lead { color:var(--muted); max-width:780px; }
+body[data-style="seo"] .hero-actions { margin-top:24px; }
+body[data-style="seo"] .btn-secondary { color:var(--forest-900); border-color:var(--line); background:#fff; }
+body[data-style="seo"] .hero-product {
+  position:sticky;
+  top:104px;
+  border-color:var(--line);
+  background:var(--surface);
+  box-shadow:var(--soft-shadow);
+  backdrop-filter:none;
+}
+body[data-style="seo"] .hero-facts div { background:#f6fbef; }
+body[data-style="seo"] .hero-facts span { color:var(--muted); }
+body[data-style="seo"] .product-section,
+body[data-style="seo"] .about-section,
+body[data-style="seo"] .process-section { background:var(--paper); }
+body[data-style="seo"] .section-heading { max-width:960px; }
+body[data-style="seo"] .split-heading { grid-template-columns:1fr; gap:12px; }
+body[data-style="seo"] .product-grid { grid-template-columns:repeat(3,1fr); gap:18px; }
+body[data-style="seo"] .product-card { box-shadow:none; }
+body[data-style="seo"] .product-card-primary { border:2px solid rgba(201,144,47,.45); }
+body[data-style="seo"] .about-grid,
+body[data-style="seo"] .contact-grid { grid-template-columns:1.15fr .85fr; align-items:start; }
+body[data-style="seo"] .value-grid { grid-template-columns:repeat(2,1fr); }
+body[data-style="seo"] .process-list { box-shadow:none; }
+body[data-style="seo"] .text-link { min-height:38px; }
+
+/* 9. Doanh nghiep - corporate B2B, trust-forward with calm blue green accents. */
+body[data-style="business"] {
+  --forest-950:#0d2530;
+  --forest-900:#173d4a;
+  --forest-700:#246172;
+  --leaf:#4f9a74;
+  --gold:#c8a15a;
+  --rice:#eef2f1;
+  --paper:#f7f9f8;
+  --surface:#ffffff;
+  --ink:#17262c;
+  --muted:#5b6970;
+  --line:rgba(23,61,74,.16);
+  --radius:12px;
+  --shadow:0 24px 70px rgba(13,37,48,.13);
+  --soft-shadow:0 14px 36px rgba(13,37,48,.08);
+}
+body[data-style="business"] .site-header.scrolled,
+body[data-style="business"] .site-header.menu-open { background:rgba(13,37,48,.96); }
+body[data-style="business"] .hero {
+  min-height:82dvh;
+  background:linear-gradient(120deg, rgba(13,37,48,.94), rgba(23,61,74,.72)), url("images/modern-rice-processing-factory.png") center/cover no-repeat;
+}
+body[data-style="business"] .hero-shade { background:linear-gradient(90deg, rgba(13,37,48,.86), rgba(13,37,48,.42), rgba(13,37,48,.2)); }
+body[data-style="business"] .hero-grid {
+  grid-template-columns:minmax(0,1fr) 420px;
+  gap:46px;
+}
+body[data-style="business"] .hero h1 { font-size:clamp(2.6rem,5vw,4.7rem); }
+body[data-style="business"] .hero-product {
+  border-radius:18px;
+  background:rgba(255,255,255,.92);
+  border:1px solid rgba(255,255,255,.45);
+  box-shadow:var(--shadow);
+}
+body[data-style="business"] .hero-product img { border-radius:12px; }
+body[data-style="business"] .hero-facts div { background:#0d2530; }
+body[data-style="business"] .product-section,
+body[data-style="business"] .partners-section { background:var(--surface); }
+body[data-style="business"] .about-section,
+body[data-style="business"] .process-section { background:linear-gradient(180deg, var(--paper), #eef4ef); }
+body[data-style="business"] .product-grid { grid-template-columns:1fr 1fr 1fr; gap:22px; }
+body[data-style="business"] .product-card { border-radius:12px; box-shadow:var(--soft-shadow); }
+body[data-style="business"] .product-card-primary { border-top:4px solid var(--gold); }
+body[data-style="business"] .about-grid,
+body[data-style="business"] .contact-grid { grid-template-columns:.95fr 1.05fr; }
+body[data-style="business"] .value-grid { grid-template-columns:repeat(4,1fr); }
+body[data-style="business"] .value-item {
+  min-height:150px;
+  border-left:0;
+  border-top:4px solid var(--forest-700);
+  background:#fff;
+}
+body[data-style="business"] .process-list div { grid-template-columns:64px 1fr; }
+body[data-style="business"] .standard-row span,
+body[data-style="business"] .chip-row span { border-radius:8px; background:#f4f7f5; }
+
+@media (max-width:1080px) {
+  body[data-style="business"] .value-grid { grid-template-columns:repeat(2,1fr); }
+}
+@media (max-width:920px) {
+  body[data-style="seo"] .hero-grid,
+  body[data-style="business"] .hero-grid,
+  body[data-style="seo"] .about-grid,
+  body[data-style="business"] .about-grid,
+  body[data-style="seo"] .contact-grid,
+  body[data-style="business"] .contact-grid { grid-template-columns:1fr; }
+  body[data-style="seo"] .hero-product { position:relative; top:auto; }
+  body[data-style="seo"] .product-grid,
+  body[data-style="business"] .product-grid { grid-template-columns:1fr 1fr; }
+}
+@media (max-width:680px) {
+  body[data-style="seo"] .product-grid,
+  body[data-style="business"] .product-grid,
+  body[data-style="business"] .value-grid { grid-template-columns:1fr; }
+}

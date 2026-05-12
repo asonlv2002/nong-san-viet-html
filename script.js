@@ -146,3 +146,48 @@ if (links.some((link) => (link.getAttribute("href") || "").startsWith("#")) && s
 } else {
   moveNavIndicator(document.querySelector(".nav-link.active"));
 }
+
+const styleSwitcher = document.getElementById("styleSwitcher");
+const styleToggle = document.getElementById("styleToggle");
+const styleOptions = Array.from(document.querySelectorAll(".style-option"));
+const defaultStyle = "original";
+const savedStyle = localStorage.getItem("siteStyle") || defaultStyle;
+
+function applySiteStyle(style) {
+  if (style === "original") {
+    document.body.removeAttribute("data-style");
+  } else {
+    document.body.dataset.style = style;
+  }
+
+  localStorage.setItem("siteStyle", style);
+  styleOptions.forEach((button) => {
+    const active = button.dataset.style === style;
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-pressed", String(active));
+  });
+}
+
+if (styleSwitcher && styleToggle && styleOptions.length) {
+  applySiteStyle(savedStyle);
+
+  styleToggle.addEventListener("click", () => {
+    const isOpen = styleSwitcher.classList.toggle("open");
+    styleToggle.setAttribute("aria-expanded", String(isOpen));
+  });
+
+  styleOptions.forEach((button) => {
+    button.addEventListener("click", () => {
+      applySiteStyle(button.dataset.style || defaultStyle);
+      styleSwitcher.classList.remove("open");
+      styleToggle.setAttribute("aria-expanded", "false");
+    });
+  });
+
+  document.addEventListener("click", (event) => {
+    if (!styleSwitcher.contains(event.target)) {
+      styleSwitcher.classList.remove("open");
+      styleToggle.setAttribute("aria-expanded", "false");
+    }
+  });
+}
