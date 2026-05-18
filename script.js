@@ -94,6 +94,54 @@ document.addEventListener("keydown", (event) => {
     setMenu(false);
   }
 });
+
+
+// Scroll effects: progress bar, reveal cascade, soft parallax, float-in cards
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const progressBar = document.createElement("div");
+progressBar.className = "scroll-progress";
+progressBar.setAttribute("aria-hidden", "true");
+document.body.appendChild(progressBar);
+
+const autoRevealSelectors = [
+  ".value-item", ".product-card", ".process-list > div", ".cook-card",
+  ".partner-card", ".machine-card", ".timeline-item", ".feature-card",
+  ".product-detail-card", ".section-heading", ".image-frame"
+];
+document.querySelectorAll(autoRevealSelectors.join(",")).forEach((el, index) => {
+  if (!el.classList.contains("reveal")) el.classList.add("reveal", "reveal-auto");
+  el.style.setProperty("--reveal-delay", `${Math.min(index % 6, 5) * 55}ms`);
+});
+
+const floatTargets = document.querySelectorAll(".product-card, .value-item, .cook-card, .machine-card, .partner-card, .image-frame");
+floatTargets.forEach((el) => el.classList.add("scroll-float"));
+
+function updateScrollEffects() {
+  const max = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
+  const progress = Math.min(window.scrollY / max, 1);
+  progressBar.style.transform = `scaleX(${progress})`;
+  document.documentElement.style.setProperty("--scroll", progress.toFixed(4));
+
+  if (!reduceMotion) {
+    document.querySelectorAll(".hero, .route-hero").forEach((el) => {
+      el.style.setProperty("--parallax-y", `${window.scrollY * 0.16}px`);
+    });
+  }
+}
+
+let ticking = false;
+window.addEventListener("scroll", () => {
+  if (ticking) return;
+  ticking = true;
+  requestAnimationFrame(() => {
+    updateScrollEffects();
+    ticking = false;
+  });
+}, { passive: true });
+window.addEventListener("resize", updateScrollEffects);
+window.addEventListener("load", updateScrollEffects);
+updateScrollEffects();
+
 const revealObserver = new IntersectionObserver(
   (entries, observer) => {
     entries.forEach((entry) => {
@@ -105,7 +153,7 @@ const revealObserver = new IntersectionObserver(
   },
   { threshold: 0.18, rootMargin: "0px 0px -8% 0px" }
 );
-reveals.forEach((element) => revealObserver.observe(element));
+document.querySelectorAll(".reveal").forEach((element) => revealObserver.observe(element));
 const sectionObserver = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {

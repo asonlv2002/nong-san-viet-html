@@ -1,7 +1,7 @@
 <div class="product-grid">
           <article class="product-card product-card-primary reveal">
             <div class="product-media">
-              <img src="images/st25-premium-rice-packaging.png" alt="Bao bì gạo ST25 hữu cơ" loading="lazy" width="1024" height="1024">
+              <img src="images/st25-premium-rice-packaging.png?v=2" alt="Bao bì gạo ST25 hữu cơ" loading="lazy" width="1024" height="1024">
             </div>
             <div class="product-body">
               <span class="tag">Chủ lực</span>
