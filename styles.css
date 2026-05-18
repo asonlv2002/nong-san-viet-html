@@ -1339,3 +1339,136 @@ button {
   .site-header .brand strong { font-size: 0.9rem; letter-spacing: -0.01em; }
   .site-header .brand small { font-size: 0.48rem; letter-spacing: 0.12em; }
 }
+
+/* Mobile UX final layer: max-width only; desktop untouched. */
+@media (max-width: 920px) {
+  html { scroll-padding-top: 84px; }
+  body { min-width: 0; }
+  .site-header {
+    padding: 10px 0;
+    background: rgba(43, 36, 21, 0.92);
+    backdrop-filter: blur(16px) saturate(1.1);
+  }
+  .site-header.scrolled,
+  .site-header.menu-open { padding: 8px 0; }
+  .nav-shell { gap: 10px; }
+  .nav-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 48px;
+    touch-action: manipulation;
+  }
+  .nav-toggle span { margin-left: auto; margin-right: auto; }
+  .nav-links {
+    left: 14px;
+    right: 14px;
+    top: calc(100% + 10px);
+    max-height: min(0px, calc(100dvh - 92px));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+  .nav-links.open { max-height: calc(100dvh - 92px); }
+  .nav-link,
+  .btn,
+  .text-link,
+  .floating-contact,
+  .nav-phone { touch-action: manipulation; }
+  .nav-link { min-height: 48px; padding: 0 16px; }
+  .hero-grid,
+  .about-grid,
+  .contact-grid,
+  .split-heading,
+  .product-detail-grid,
+  .related-grid { grid-template-columns: 1fr; }
+  .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .hero-product { max-width: 520px; }
+}
+
+@media (max-width: 760px) {
+  .site-header .brand {
+    max-width: calc(100vw - 88px);
+    gap: 8px;
+    padding: 6px 10px 6px 7px;
+    min-height: 48px;
+  }
+  .site-header .brand img {
+    width: 38px;
+    height: 38px;
+  }
+  .site-header .brand span { min-width: 0; }
+  .site-header .brand strong,
+  .site-header .brand small {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .site-header .brand strong { font-size: clamp(0.82rem, 3.5vw, 0.94rem); }
+  .site-header .brand small { font-size: clamp(0.42rem, 2.2vw, 0.5rem); letter-spacing: 0.08em; }
+}
+
+@media (max-width: 680px) {
+  :root { --radius: 16px; }
+  .container { width: min(100% - 28px, var(--container)); }
+  .section { padding: 56px 0; }
+  .hero {
+    min-height: 78dvh;
+    padding: 96px 0 42px;
+    background-position: 58% center;
+  }
+  .hero-shade {
+    background: linear-gradient(180deg, rgba(43,36,21,.88), rgba(94,66,28,.68) 58%, rgba(94,66,28,.42));
+  }
+  .hero h1 { font-size: clamp(2rem, 11vw, 2.6rem); line-height: 1.1; }
+  .route-hero h1,
+  .product-detail-copy h1 { font-size: clamp(2rem, 10vw, 2.75rem); }
+  .hero-lead,
+  .route-hero p,
+  .product-detail-copy .hero-lead { font-size: 1rem; line-height: 1.65; }
+  .eyebrow { line-height: 1.4; }
+  .hero-actions,
+  .contact-actions { display: grid; grid-template-columns: 1fr; gap: 12px; }
+  .btn {
+    width: 100%;
+    min-height: 48px;
+    justify-content: center;
+    text-align: center;
+    padding: 0 18px;
+  }
+  .hero-product { display: none; }
+  .section-heading h2,
+  .about-copy h2,
+  .contact-copy h2 { font-size: clamp(1.72rem, 8vw, 2.05rem); line-height: 1.18; }
+  .product-grid,
+  .partner-grid,
+  .value-grid { grid-template-columns: 1fr; gap: 16px; }
+  .product-card,
+  .cook-card,
+  .contact-form,
+  .feature-list li { border-radius: var(--radius); }
+  .product-body,
+  .cook-card,
+  .contact-form { padding: 22px; }
+  .chip-row { gap: 8px; }
+  .chip-row span { min-height: 34px; display: inline-flex; align-items: center; }
+  .process-list div { grid-template-columns: 44px 1fr; gap: 12px; padding: 16px; }
+  .process-list span { width: 38px; height: 38px; }
+  .contact-list div { grid-template-columns: 1fr; gap: 6px; }
+  .form-row { grid-template-columns: 1fr; }
+  input,
+  textarea { min-height: 48px; font-size: 16px; }
+  .related-card { grid-template-columns: 92px 1fr; gap: 12px; }
+  .related-card img { width: 92px; height: 78px; }
+  .footer-row { align-items: flex-start; flex-direction: column; gap: 12px; }
+  .floating-contact { right: 14px; bottom: 14px; min-height: 48px; min-width: 72px; padding: 0 16px; }
+}
+
+@media (max-width: 380px) {
+  .container { width: min(100% - 22px, var(--container)); }
+  .site-header .brand small { display: none; }
+  .site-header .brand { max-width: calc(100vw - 82px); }
+  .hero h1 { font-size: 2rem; }
+  .related-card { grid-template-columns: 1fr; }
+  .related-card img { width: 100%; height: auto; aspect-ratio: 4 / 3; }
+}
